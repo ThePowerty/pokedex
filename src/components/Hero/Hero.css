@@ -1,0 +1,23 @@
+.hero {
+    display: flex;
+    padding: 2rem 15%;
+    gap: 2rem;
+    justify-content: center;
+}
+
+.hero-description {
+    display: flex;
+    flex-direction: column;
+    padding: 3rem;
+    gap: 2rem;
+}
+
+.hero-description h1{
+    font-size: 35px;
+    color: yellow;
+    text-shadow: 
+                -2px -2px 0px blue,
+                2px -2px 0px blue,
+                -2px 2px 0px blue,
+                2px 2px 0px blue;
+}

@@ -1,0 +1,39 @@
+.nav {
+    display: flex;
+    justify-content: center;
+}
+
+.nav-menu{
+    display: flex;
+    align-items: center;
+    list-style: none;
+    gap: 10px;
+    font-size: 20px;
+}
+
+.nav-menu a {
+    font-weight: 500;
+    color: black;
+    text-decoration: none;
+}
+
+.nav-menu li {
+    padding: 5px 10px;
+    border: 2px solid grey;
+    border-radius: 0.5rem;
+    background-color: mintcream;
+    transition: 0.5s;
+}
+
+.nav-menu li:hover {
+    transform: scale(1.05);
+    transition: 0.5s;
+}
+
+.nav-menu .active{
+    background-color: red;
+}
+
+.nav-menu .active a {
+    color: white;
+}
