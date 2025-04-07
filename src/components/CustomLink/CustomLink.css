@@ -1,0 +1,26 @@
+[class$="-menu"] a {
+    font-weight: 500;
+    color: black;
+    text-decoration: none;
+}
+
+[class$="-menu"] li {
+    padding: 5px 10px;
+    border: 2px solid grey;
+    border-radius: 0.5rem;
+    background-color: mintcream;
+    transition: 0.5s;
+}
+
+[class$="-menu"] li:hover {
+    transform: scale(1.05);
+    transition: 0.5s;
+}
+
+[class$="-menu"] .active{
+    background-color: red;
+}
+
+[class$="-menu"] .active a {
+    color: white;
+}

@@ -1,0 +1,60 @@
+.filter {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.filter-search {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.filter-search img {
+    max-width: 60px;
+}
+
+.filter-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.filter-types ul{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    list-style: none;
+    gap: 10px;
+}
+
+.filter-types li {
+    border-radius: 1rem;
+}
+
+.filter-types label {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.filter-btn {
+    display: flex;
+    gap: 20px;
+}
+
+.filter-btn .search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 25px;
+    gap: 5px;
+    background-color: chocolate;
+}
+
+.filter-btn .search img{
+    max-width: 30px;
+}
+
+.filter-btn .clear {
+    background-color: slategray;
+}
