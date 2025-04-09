@@ -1,8 +1,8 @@
 import "./Checkbox.css"
 
-export const Checkbox = ({ key, label, id, checked, onChange, value }) => {
+export const Checkbox = ({ index, label, id, checked, onChange, value }) => {
     return (
-        <li className={label} key={key}>
+        <li className={label} key={index}>
           <label>
             {label}
             <input
