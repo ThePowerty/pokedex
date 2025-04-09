@@ -1,14 +1,10 @@
-import { useState } from "react";
 import "./SeekBar.css";
 
-export const SeekBar = ({ min, max, step, onChange }) => {
-  const media = (min + max) / 2;
-  const [value, setValue] = useState(media);
+export const SeekBar = ({ min, max, step, value, onChange }) => {
 
   const handleChange = (event) => {
     const newValue = event.target.value;
-    setValue(newValue);
-    onChange(newValue); // Llama a la función onChange pasada como prop
+    onChange(newValue);
   };
 
   return (
@@ -20,7 +16,7 @@ export const SeekBar = ({ min, max, step, onChange }) => {
         step={step}
         value={value}
         onChange={handleChange}
-      />
+        />
       <p>Valor: {value}</p>
     </div>
   );

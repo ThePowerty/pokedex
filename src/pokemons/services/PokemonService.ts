@@ -1,5 +1,10 @@
 import axios from "axios";
-import { Pokemon, StatPokemon, TipoPokemon, Type } from "../models/pokemon.model";
+import {
+  Pokemon,
+  StatPokemon,
+  TipoPokemon,
+  Type,
+} from "../models/pokemon.model";
 
 class PokemonService {
   private BASE_URL = "https://pokeapi.co/api/v2";
@@ -18,6 +23,32 @@ class PokemonService {
     return pokemons;
   }
 
+  async getAllPokemons(): Promise<Pokemon[]> {
+    const total = 1302;
+    const limit = 200;
+    const pokemons: Pokemon[] = [];
+
+    for (let offset = 0; offset < total; offset += limit) {
+      const response = await axios.get<{
+        results: { name: string; url: string }[];
+      }>(`${this.BASE_URL}/pokemon?limit=${limit}&offset=${offset}`);
+
+      const results = response.data.results;
+
+      const promises = results.map((result) => this.getPokemon(result.url));
+      const chunkResults = await Promise.allSettled(promises);
+
+      chunkResults.forEach((result) => {
+        if (result.status === "fulfilled") {
+          pokemons.push(result.value);
+        } else {
+          console.error("Error al obtener Pokemons: ", result.reason);
+        }
+      });
+    }
+    return pokemons;
+  }
+
   private async getPokemon(url: string): Promise<Pokemon> {
     const pokemonDetails = await axios.get(url);
     const capitalizer = (texto: string): string => {
@@ -32,7 +63,10 @@ class PokemonService {
       weight: pokemonDetails.data.weight,
       stats: pokemonDetails.data.stats.map((statInfo: any) => ({
         base_stat: statInfo.base_stat,
-        name: capitalizer(StatPokemon[statInfo.stat.name as keyof typeof StatPokemon] || statInfo.stat.name),
+        name: capitalizer(
+          StatPokemon[statInfo.stat.name as keyof typeof StatPokemon] ||
+            statInfo.stat.name
+        ),
       })),
       types: pokemonDetails.data.types.map((typeInfo: any) => {
         return capitalizer(
@@ -68,19 +102,24 @@ class PokemonService {
 
       const flattenedPokemons = allPokemons.flat();
 
-      const pokemons = await Promise.all(
-        flattenedPokemons.map(async (pokemon: any) => {
-          return await this.getPokemon(pokemon.pokemon.url);
-        })
-      );
+      const pokemonCountMap = new Map();
 
-      const definedPokemons: Pokemon[] = pokemons.filter(
-        (p): p is Pokemon => p !== undefined
-      );
+      flattenedPokemons.forEach((pokemon) => {
+        const pokemonUrl = pokemon.pokemon.url;
+        if (pokemonCountMap.has(pokemonUrl)) {
+          pokemonCountMap.set(pokemonUrl, pokemonCountMap.get(pokemonUrl) + 1);
+        } else {
+          pokemonCountMap.set(pokemonUrl, 1);
+        }
+      });
 
-      const uniquePokemons = Array.from(
-        new Set(definedPokemons.map((p) => p.id))
-      ).map((id) => definedPokemons.find((p) => p.id === id)!);
+      const requiredTypeCount = urls.length;
+
+      const filteredPokemons = Array.from(pokemonCountMap.entries())
+        .filter(([_, count]) => count === requiredTypeCount)
+        .map(([url]) => this.getPokemon(url));
+
+      const uniquePokemons = await Promise.all(filteredPokemons);
 
       return uniquePokemons;
     } catch (error) {

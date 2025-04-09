@@ -33,3 +33,21 @@
     border-radius: 5px;
     color: white;
 }
+
+.filtered {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid red;
+    border-radius: 15px;
+    padding: 1rem;
+    gap: 10px;
+}
+
+.filtered h2 {
+    color: red;
+}
+
+.filtered ul {
+    margin: 0 1rem;
+    list-style-type: disc;
+}
