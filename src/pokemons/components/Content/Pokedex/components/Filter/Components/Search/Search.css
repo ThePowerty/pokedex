@@ -1,0 +1,18 @@
+.search {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.search input {
+    width: 250px;
+    height: 40px;
+    border: 2px solid grey;
+    border-radius: 15px;
+    padding: 1rem;
+    font-size: 20px;
+}
+
+.search button {
+    background-color: chocolate;
+}

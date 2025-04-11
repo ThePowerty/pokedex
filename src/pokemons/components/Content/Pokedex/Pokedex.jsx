@@ -5,7 +5,7 @@ import { Filter, List } from "./components";
 export const Pokedex = () => {
   
   const [search, setSearch] = useState([]);
-  const [filter, setFilter] = useState({weight: 0, height: 0.1})
+  const [filter, setFilter] = useState({weight: 0, height: 0.1, search: ""})
 
   return (
     <div className="pokedex">

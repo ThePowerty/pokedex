@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import "./Filter.css";
 import down from "../assets/down.svg";
 import up from "../assets/up.svg";
-import search from "../assets/search.svg";
+import search from "../assets/search.png";
 import { pokemonService } from "../../../../../services/PokemonService";
-import { Checkbox, SeekBar } from "./Components";
+import { Checkbox, Search, SeekBar } from "./Components";
 
 export const Filter = ({ setSearch, setFilter }) => {
   const [open, setOpen] = useState(false);
@@ -16,6 +16,7 @@ export const Filter = ({ setSearch, setFilter }) => {
   const [valueWeight, setValueWeight] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     const fetchFilters = async () => {
@@ -72,7 +73,7 @@ export const Filter = ({ setSearch, setFilter }) => {
 
   const handleClick = () => {
     setSearch(selectedTypes);
-    setFilter({ weight: valueWeight, height: valueHeight, change: true });
+    setFilter({ weight: valueWeight, height: valueHeight, search: searchTerm });
   };
 
   const handleClearSelection = () => {
@@ -83,12 +84,30 @@ export const Filter = ({ setSearch, setFilter }) => {
     setFilter({ weight: 0, height: 0.1 });
   };
 
+  const handleSearchPokemon = () => {
+    setFilter({weight: 0, height: 0.1, search: searchTerm})
+  }
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      handleSearchPokemon(); // Llama a la función de búsqueda si se presiona "Enter"
+    }
+  };
+
   if (error) {
     return <div>{error}</div>;
   }
 
   return (
     <div className="filter">
+      <Search
+        type="text"
+        placeholder="Buscar Pokémon"
+        value={searchTerm}
+        onChange={(event) => setSearchTerm(event.target.value)}
+        onClick={handleSearchPokemon}
+        onKeyDown={handleKeyDown}
+      />
       <button className="filter-search" onClick={handleToggle}>
         Búsqueda avanzada <img src={src} alt="arrow" />
       </button>
@@ -138,11 +157,11 @@ export const Filter = ({ setSearch, setFilter }) => {
               </div>
             </div>
             <div className="filter-btn">
-              <button className="search" onClick={handleClick}>
+              <button className="search-btn" onClick={handleClick}>
                 <img src={search} alt="search" />
                 <strong>Buscar</strong>
               </button>
-              <button className="clear" onClick={handleClearSelection}>
+              <button className="clear-btn" onClick={handleClearSelection}>
                 <strong>Restablecer</strong>
               </button>
             </div>

@@ -54,20 +54,19 @@
     gap: 20px;
 }
 
-.filter-btn .search {
+.filter-btn .search-btn {
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 10px 25px;
     gap: 5px;
     background-color: chocolate;
-    color: black;
 }
 
 .filter-btn .search img{
     max-width: 30px;
 }
 
-.filter-btn .clear {
+.filter-btn .clear-btn {
     background-color: slategray;
 }

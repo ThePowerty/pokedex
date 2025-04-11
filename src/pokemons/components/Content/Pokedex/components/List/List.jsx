@@ -24,6 +24,10 @@ export const List = ({ search, filter }) => {
           if(search.length === 0) data = await pokemonService.getAllPokemons();
           data = data.filter(pokemon => (pokemon.weight * 0.1) >= filter.weight && (pokemon.height * 0.1) >= filter.height);
         }
+        if (filter.search !== "") {
+          if(search.length === 0) data = await pokemonService.getAllPokemons();
+          data = data.filter(pokemon => pokemon.name.toLowerCase().includes(filter.search.toLowerCase()))
+        }
         setFiltered(data.length!==0)
         setPokemons(data);
       } catch (err) {
@@ -34,7 +38,7 @@ export const List = ({ search, filter }) => {
     };
 
     fetchPokemons();
-  }, [filter.height, filter.weight, limit, search]);
+  }, [filter.height, filter.search, filter.weight, limit, search]);
 
   const increaseLimit = () => {
     setLimit((prevLimit) => prevLimit + 12);
