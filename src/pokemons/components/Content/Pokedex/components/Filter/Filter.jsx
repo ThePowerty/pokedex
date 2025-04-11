@@ -6,7 +6,7 @@ import search from "../assets/search.svg";
 import { pokemonService } from "../../../../../services/PokemonService";
 import { Checkbox, SeekBar } from "./Components";
 
-export const Filter = ({ setSearch }) => {
+export const Filter = ({ setSearch, setFilter }) => {
   const [open, setOpen] = useState(false);
   const [src, setSrc] = useState(down);
   const [types, setTypes] = useState([]);
@@ -29,21 +29,23 @@ export const Filter = ({ setSearch }) => {
         const heights = pokemons.map((pokemon) => pokemon.height);
         const weights = pokemons.map((pokemon) => pokemon.weight);
 
-        const minHeight = Math.min(...heights);
-        const maxHeight = Math.max(...heights);
-        const minWeight = Math.min(...weights);
-        const maxWeight = Math.max(...weights);
+        const minHeight = Math.min(...heights) * 0.1;
+        const maxHeight = Math.max(...heights) * 0.1;
+        const minWeight = Math.min(...weights) * 0.1;
+        const maxWeight = Math.max(...weights) * 0.1;
 
         setStats({
           heights: {
-            min: minHeight * 0.1,
-            max: maxHeight * 0.1,
+            min: minHeight,
+            max: maxHeight,
           },
           weights: {
-            min: minWeight * 0.1,
-            max: maxWeight * 0.1,
+            min: minWeight,
+            max: maxWeight,
           },
         });
+        setValueHeight(minHeight);
+        setValueWeight(minWeight);
       } catch (err) {
         setError("Error al cargar los Pokémon", err);
       } finally {
@@ -70,6 +72,7 @@ export const Filter = ({ setSearch }) => {
 
   const handleClick = () => {
     setSearch(selectedTypes);
+    setFilter({ weight: valueWeight, height: valueHeight, change: true });
   };
 
   const handleClearSelection = () => {
@@ -77,6 +80,7 @@ export const Filter = ({ setSearch }) => {
     setSearch([]);
     setValueHeight(stats.heights.min);
     setValueWeight(stats.weights.min);
+    setFilter({ weight: 0, height: 0.1 });
   };
 
   if (error) {
@@ -90,7 +94,7 @@ export const Filter = ({ setSearch }) => {
       </button>
       {open ? (
         loading ? (
-          <div>Cargando ...</div>
+          <div>Cargando filtros ...</div>
         ) : (
           <div className="filter-container">
             <div className="filter-content">

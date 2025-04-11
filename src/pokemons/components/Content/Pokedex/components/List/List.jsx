@@ -3,7 +3,7 @@ import "./List.css";
 import { pokemonService } from "../../../../../services/PokemonService";
 import { Link } from "react-router-dom";
 
-export const List = ({ search }) => {
+export const List = ({ search, filter }) => {
   const [limit, setLimit] = useState(12);
   const [pokemons, setPokemons] = useState([]);
   const [filtered, setFiltered] = useState(true);
@@ -12,15 +12,19 @@ export const List = ({ search }) => {
 
   useEffect(() => {
     const fetchPokemons = async () => {
+      setLoading(true)
       try {
         let data;
         if (search.length === 0) {
           data = await pokemonService.getPokedex(limit);
-          setFiltered(true);
         } else {
           data = await pokemonService.getPokemonByTypes(search);
-          if (data.length === 0) setFiltered(false);
         }
+        if (filter.weight !== 0 || filter.height !== 0.1) {
+          if(search.length === 0) data = await pokemonService.getAllPokemons();
+          data = data.filter(pokemon => (pokemon.weight * 0.1) >= filter.weight && (pokemon.height * 0.1) >= filter.height);
+        }
+        setFiltered(data.length!==0)
         setPokemons(data);
       } catch (err) {
         setError("Error al cargar los Pokémon", err);
@@ -30,14 +34,14 @@ export const List = ({ search }) => {
     };
 
     fetchPokemons();
-  }, [limit, search]);
+  }, [filter.height, filter.weight, limit, search]);
 
   const increaseLimit = () => {
     setLimit((prevLimit) => prevLimit + 12);
   };
 
   if (loading) {
-    return <div>Cargando...</div>;
+    return <div>Cargando Pokémons ...</div>;
   }
 
   if (error) {
