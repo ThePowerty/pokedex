@@ -90,6 +90,7 @@ export const List = ({ search, filter }) => {
             <li>Selecciona menos tipos.</li>
             <li>Deja el campo de altura y peso por defecto.</li>
           </ul>
+          <p><strong>Nota: </strong>No se puede buscar por número de pokedex.</p>
         </div>
       )}
     </>

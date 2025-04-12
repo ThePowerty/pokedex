@@ -81,7 +81,7 @@ export const Filter = ({ setSearch, setFilter }) => {
     setSearch([]);
     setValueHeight(stats.heights.min);
     setValueWeight(stats.weights.min);
-    setFilter({ weight: 0, height: 0.1 });
+    setFilter({ weight: 0, height: 0.1, search: "" });
   };
 
   const handleSearchPokemon = () => {
@@ -90,7 +90,7 @@ export const Filter = ({ setSearch, setFilter }) => {
 
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
-      handleSearchPokemon(); // Llama a la función de búsqueda si se presiona "Enter"
+      handleSearchPokemon();
     }
   };
 
