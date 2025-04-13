@@ -48,7 +48,7 @@ export const Filter = ({ setSearch, setFilter }) => {
         setValueHeight(minHeight);
         setValueWeight(minWeight);
       } catch (err) {
-        setError("Error al cargar los Pokémon", err);
+        setError("Error al cargar los Filtros", err);
       } finally {
         setLoading(false);
       }

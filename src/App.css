@@ -1,0 +1,73 @@
+.Fuego {
+    background-color: red;
+}
+
+.Agua {
+    background-color: royalblue;
+}
+
+.Planta {
+    background-color: green;
+}
+
+.Bicho {
+    background-color: darkgreen;
+}
+
+.Veneno {
+    background-color: purple;
+}
+
+.Volador {
+    background-color: cornflowerblue;
+}
+
+.Normal {
+    background-color: grey;
+}
+
+.Eléctrico {
+    background-color: yellow;
+    color: black !important;
+}
+
+.Tierra {
+    background-color: tan;
+}
+
+.Hada {
+    background-color: pink;
+    color: black;
+}
+
+.Lucha {
+    background-color: orange;
+}
+
+.Psíquico {
+    background-color: palevioletred;
+}
+
+.Roca {
+    background-color: peru;
+}
+
+.Acero {
+    background-color: lightslategray;
+}
+
+.Hielo {
+    background-color: lightsteelblue;
+}
+
+.Fantasma {
+    background-color: blueviolet;
+}
+
+.Dragón {
+    background-color: orangered;
+}
+
+.Siniestro {
+    background-color: darkslategrey;
+}
