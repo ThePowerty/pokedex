@@ -44,6 +44,7 @@ export interface Pokemon {
 }
 
 export interface Type {
+  id: number;
   name: TipoPokemon;
   url: string;
 }

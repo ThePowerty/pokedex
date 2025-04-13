@@ -80,10 +80,11 @@ class PokemonService {
 
   async getTypes(): Promise<Type[]> {
     const type = await axios.get<{
-      results: { name: string; url: string }[];
+      results: { id: number; name: string; url: string }[];
     }>(`${this.BASE_URL}/type?limit=18`);
 
-    const types: Type[] = type.data.results.map((result) => ({
+    const types: Type[] = type.data.results.map((result, index) => ({
+      id: index + 1,
       name: TipoPokemon[result.name as keyof typeof TipoPokemon],
       url: result.url,
     }));

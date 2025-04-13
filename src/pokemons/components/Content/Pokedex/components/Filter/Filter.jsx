@@ -124,7 +124,7 @@ export const Filter = ({ setSearch, setFilter }) => {
                     <Checkbox
                       key={index}
                       label={type.name}
-                      id={type.name}
+                      id={type.id}
                       value={type.url}
                       checked={selectedTypes.includes(type.url)}
                       onChange={handleCheckboxChange}
