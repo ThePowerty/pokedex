@@ -4,7 +4,6 @@ import { pokemonService } from "../../../services/PokemonService";
 import superEficaz from "./assets/X2.svg";
 import pocoEficaz from "./assets/1-2.svg";
 import noAfecta from "./assets/X0.svg";
-import { TipoPokemon } from "../../../models/pokemon.model";
 import { getEffectiveness } from "../../../services/EffectivenessService";
 
 export const TypeList = () => {
@@ -47,7 +46,7 @@ export const TypeList = () => {
           </tr>
           <tr className="vertical-type">
             {types.map((type) => (
-              <td className={type.name} key={type.name}>
+              <td className={type.name} key={type.id}>
                 <a href="">
                   <p>{type.name}</p>
                 </a>
@@ -60,7 +59,7 @@ export const TypeList = () => {
             </th>
           </tr>
           {types.map((type) => (
-            <tr key={type.name}>
+            <tr key={type.id}>
               <td className={type.name}>
                 <a href="">
                   <p>{type.name}</p>
@@ -73,7 +72,7 @@ export const TypeList = () => {
                 const hasNoEffect = effectiveness.noEffect.includes(opponentType.name);
 
                 return (
-                  <td key={opponentType.name}>
+                  <td key={opponentType.id}>
                     {isStrong && <img src={superEficaz} alt="Super Eficaz" />}
                     {isWeak && <img src={pocoEficaz} alt="Poco Eficaz" />}
                     {hasNoEffect && <img src={noAfecta} alt="No Afecta" />}
