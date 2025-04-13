@@ -26,7 +26,7 @@ export const TypeList = () => {
   }, []);
 
   if (loading) {
-    return <div>Cargando ...</div>;
+    return <div className="type-list">Cargando ...</div>;
   }
 
   if (error) {
@@ -36,8 +36,8 @@ export const TypeList = () => {
   return (
     <div className="type-list">
       <h1>Tabla de tipos</h1>
-      <table>
-        <tbody className="table-type">
+      <table className="table-type">
+        <tbody>
           <tr>
             <th colSpan={2} rowSpan={2}>
               Efectividad

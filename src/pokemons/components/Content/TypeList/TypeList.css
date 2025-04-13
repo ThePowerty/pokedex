@@ -39,6 +39,10 @@ table {
     background-color: aliceblue;
 }
 
+.table-type tr:hover {
+    background: #f5f5dc;
+}
+
 th {
     color: black;
     background-color: chocolate;
