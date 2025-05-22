@@ -3,6 +3,7 @@
   "private": true,
   "version": "1.0.2",
   "type": "module",
+  "homepage": "https://thepowerty.github.io/poke-will/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
