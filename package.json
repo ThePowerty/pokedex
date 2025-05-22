@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.2",
   "type": "module",
-  "homepage": "https://thepowerty.github.io/poke-will/",
+  "homepage": "https://thepowerty.github.io/pokedex/",
   "scripts": {
     "dev": "vite",
     "predeploy": "npm run build",
